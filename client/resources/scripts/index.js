@@ -21,12 +21,24 @@ function handleEditClick()
 {
     makeEditable();
     hideButtons();
-    var buttonHtml = "<button class=\"btn btn-primary btn-lg\" onClick=\"handleEditSave("+myBook.id+")\">Save</button>"
-    buttonHtml += "<button class=\"btn btn-warning btn-lg btn-cancle\" onClick=\"handleCancelSave()\">Cancel</button>"
+    var buttonHtml = "<button class=\"btn btn-primary btn-lg\" onclick=\"handleEditSave("+myBook.id+")\">Save</button>"
+    buttonHtml += "<button class=\"btn btn-warning btn-lg btn-cancle\" onclick=\"handleCancelSave()\">Cancel</button>"
     document.getElementById("saveButton").innerHTML = buttonHtml;
     document.getElementById("saveButton").style.display = "inline-block";
 
 }
+
+function handleNewClick()
+{
+    makeEditable();
+    hideButtons();
+    blankFields();
+    var buttonHtml = "<button class=\"btn btn-primary btn-lg\" onclick=\"handleNewSave()\">Save</button>"
+    buttonHtml += "<button class=\"btn btn-warning btn-lg btn-cancle\" onclick=\"handleCancelSave()\">Cancel</button>"
+    document.getElementById("saveButton").innerHTML = buttonHtml;
+    document.getElementById("saveButton").style.display = "inline-block";
+}
+
 
 function handleRentClick()
 {
@@ -35,13 +47,40 @@ function handleRentClick()
     putBook(myBook.id);
 }
 
-function handleRentClick()
+function handleReturnClick()
 {
     myBook.numAvlb++;
     document.getElementById("bookAvlb").value = myBook.numAvlb;
     putBook(myBook.id);
 }
 
+function handleDeleteClick()
+{
+    deleteBook();
+}
+
+function handleCancelSave()
+{
+    populateForm();
+    makeReadOnly();
+    showButtons();
+}
+
+function handleEditSave(id)
+{
+    postBook(id);
+    makeReadOnly();
+    showButtons();
+    blankFields();
+}
+
+function handleNewSave()
+{
+    postBook();
+    makeReadOnly();
+    showButtons();
+    blankFields();
+}
 
 function populateForm()
 {
